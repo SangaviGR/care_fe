@@ -108,28 +108,28 @@ function LocationRow({
             )}
             {location.name}
           </div>
-          {isTopLevel && (
+          {
             <div className="flex justify-between items-center gap-2">
-              <div className="flex-1">
-                {children.length > 0 && displayExpandAll && (
-                  <Button
-                    variant="white"
-                    size={isMobile ? "xs" : "sm"}
-                    onClick={toggleAllChildren}
-                    className="gap-2"
-                  >
-                    <CareIcon
-                      icon={allExpanded ? "l-minus" : "l-plus"}
-                      className="h-4 w-4"
-                    />
-                    <span className="hidden lg:inline">
-                      {t(allExpanded ? "collapse_all" : "expand_all")}
-                    </span>
-                  </Button>
-                )}
-              </div>
+              {isTopLevel && children.length > 0 && displayExpandAll && (
+                <Button
+                  variant="white"
+                  size={isMobile ? "xs" : "sm"}
+                  onClick={toggleAllChildren}
+                  className="gap-2"
+                >
+                  <CareIcon
+                    icon={allExpanded ? "l-minus" : "l-plus"}
+                    className="h-4 w-4"
+                  />
+                  <span className="hidden lg:inline">
+                    {t(allExpanded ? "collapse_all" : "expand_all")}
+                  </span>
+                </Button>
+              )}
 
               <div className="flex items-center gap-2 ml-auto">
+                {/* Every location, whether top-level or nested, will have the "Edit" button */}
+
                 <Button
                   variant="white"
                   size={isMobile ? "xs" : "sm"}
@@ -138,6 +138,7 @@ function LocationRow({
                   <PenLine className="h-4 w-4" />
                   <span className="hidden lg:inline">{t("edit")}</span>
                 </Button>
+                {/* Every location, whether top-level or nested, will have the "See Details" button */}
 
                 <Button variant="white" size={isMobile ? "xs" : "sm"} asChild>
                   <Link
@@ -150,7 +151,7 @@ function LocationRow({
                 </Button>
               </div>
             </div>
-          )}
+          }
         </TableCell>
         <TableCell className="hidden sm:table-cell border-l bg-white font-semibold text-gray-900">
           {t(`location_form__${location.form}`)}
